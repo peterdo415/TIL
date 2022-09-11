@@ -15,4 +15,28 @@ server.mount_proc("/time") do |req, res|
   res.body = body
 end
 
+server.mount_proc("/form_get") do |req, res|
+  body = "<html><meta charset='UTF-8'>
+  <body>クエリパラメータは{&quot;username&quot;=>&quot;#{req.query['user_name']}&quot; , 
+  &quot;age&quot;=>&quot;#{req.query['user_age']}&quot;} です<br>
+  こんにちは#{req.query['user_name']}さん
+  あなたの年齢は#{req.query['user_age']}ですね
+  </body></html>"
+  res.status = 200
+  res['Content-Type'] = 'text/html'
+  res.body = body
+end
+
+server.mount_proc("/form_post") do |req, res|
+  body = "<html><meta charset='UTF-8'>
+  <body>フォームデータは{&quot;username&quot;=>&quot;#{req.query['user_name']}&quot; , 
+  &quot;age&quot;=>&quot;#{req.query['user_age']}&quot;}です<br>
+  こんにちは#{req.query['user_name']}さん
+  あなたの年齢は#{req.query['user_age']}ですね
+  </body></html>"
+  res.status = 200
+  res['Content-Type'] = 'text/html'
+  res.body = body
+end
+
 server.start
